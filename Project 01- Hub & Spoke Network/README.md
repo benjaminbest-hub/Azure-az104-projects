@@ -167,3 +167,27 @@ Examples include:
 - ✅ Forced Internet Traffic Through Azure Firewall
 - ✅ Window Server Virtual Machines
 
+# Project Achievements
+
+Successfully designed and deployed a secure Azure Hub-and-Spoke network architecture.
+
+## Achievements
+
+- Created a centralized Hub Virtual Network.
+- Deployed Azure Firewall as the central security appliance.
+- Configured Azure Bastion for secure administrative access.
+- Created Development, Production, and Testing Virtual Networks.
+- Configured VNet Peering between the Hub and all Spoke networks.
+- Implemented User Defined Routes to force traffic through Azure Firewall.
+- Created dedicated Network Security Groups for each environment.
+- Deployed Windows Server Virtual Machines in each subnet.
+- Validated connectivity using ICMP ping tests.
+- Verified routing using Azure Network Watcher's Effective Routes.
+- Troubleshot Windows Firewall to restore ICMP communication.
+- Successfully achieved secure communication between all spoke virtual machines without exposing them directly to the Internet.
+
+## Outcome
+
+The final solution provides centralized traffic inspection, secure remote administration, network isolation, and a scalable architecture suitable for enterprise cloud deployments.
+
+
