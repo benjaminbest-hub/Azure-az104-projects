@@ -35,3 +35,10 @@ This repository contains 10 enterprise Azure projects built while preparing for 
 - [ ] Virtual Machines
 - [ ] Azure Bastion
 - [ ] Azure Firewall
+---
+
+Last Updated
+
+20 July 2026
+
+Project maintained by Benjamin Best.
