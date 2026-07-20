@@ -1,6 +1,6 @@
 # Design Decisions
 
-## Why Hub-and-Spoke?
+## Why Hub & Spoke?
 
 Instead of connecting every Virtual Network directly together, a Hub & Spoke topology was selected.
 
