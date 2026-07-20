@@ -160,10 +160,10 @@ Examples include:
 - ✅ Created Production VNet
 - ✅ Created Development VNet
 - ✅ Created Testing VNet
-- ✅ Configured Hub-and-Spoke Peering
+- ✅ Configured Hub & Spoke Peering
 - ✅ Created Network Security Groups
 - ✅ Associated NSGs with Subnets
 - ✅ Created Route Table
 - ✅ Forced Internet Traffic Through Azure Firewall
-- ⏳ Deploying Virtual Machines
+- ✅ Window Server Virtual Machines
 
