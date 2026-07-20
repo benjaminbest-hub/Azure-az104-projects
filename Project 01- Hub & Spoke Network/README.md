@@ -152,4 +152,18 @@ Examples include:
 - Azure Bastion
 - GitHub
 - Markdown
+## Progress
+
+- ✅ Created Hub Virtual Network
+- ✅ Created Azure Firewall
+- ✅ Created Azure Bastion
+- ✅ Created Production VNet
+- ✅ Created Development VNet
+- ✅ Created Testing VNet
+- ✅ Configured Hub-and-Spoke Peering
+- ✅ Created Network Security Groups
+- ✅ Associated NSGs with Subnets
+- ✅ Created Route Table
+- ✅ Forced Internet Traffic Through Azure Firewall
+- ⏳ Deploying Virtual Machines
 
