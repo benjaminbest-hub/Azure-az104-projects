@@ -1,0 +1,23 @@
+# .NET
+bin/
+obj/
+publish/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Azure deployment artifacts
+appservice-startup-logs/
+appservice-startup-logs.zip
+LogFiles/
+
+# EF bundle
+efbundle.exe
+
+# Zip packages
+*.zip
+
+# Local development settings
+appsettings.Development.json
