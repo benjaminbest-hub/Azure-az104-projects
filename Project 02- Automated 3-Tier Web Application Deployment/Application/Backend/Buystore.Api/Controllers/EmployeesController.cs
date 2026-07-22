@@ -1,5 +1,7 @@
+using Buystore.Api.Data;
 using Buystore.Api.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Buystore.Api.Controllers;
 
@@ -7,40 +9,32 @@ namespace Buystore.Api.Controllers;
 [Route("api/[controller]")]
 public class EmployeesController : ControllerBase
 {
-    private static readonly List<Employee> Employees =
-    [
-        new Employee
-        {
-            Id = 1,
-            FirstName = "Benjamin",
-            LastName = "Okeh",
-            Email = "benjamin.okeh@buystore.com",
-            Department = "Information Technology",
-            JobTitle = "IT Manager",
-            DateCreatedUtc = DateTime.UtcNow
-        },
-        new Employee
-        {
-            Id = 2,
-            FirstName = "Sarah",
-            LastName = "Bankole",
-            Email = "sarah.bankole@buystore.com",
-            Department = "Human Resources",
-            JobTitle = "HR Manager",
-            DateCreatedUtc = DateTime.UtcNow
-        }
-    ];
+    private readonly AppDbContext _context;
 
-    [HttpGet]
-    public ActionResult<IEnumerable<Employee>> GetEmployees()
+    public EmployeesController(AppDbContext context)
     {
-        return Ok(Employees);
+        _context = context;
     }
 
-    [HttpGet("{id:int}")]
-    public ActionResult<Employee> GetEmployeeById(int id)
+    // GET: api/employees
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
     {
-        var employee = Employees.FirstOrDefault(e => e.Id == id);
+        var employees = await _context.Employees
+            .AsNoTracking()
+            .OrderBy(e => e.Id)
+            .ToListAsync();
+
+        return Ok(employees);
+    }
+
+    // GET: api/employees/1
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<Employee>> GetEmployeeById(int id)
+    {
+        var employee = await _context.Employees
+            .AsNoTracking()
+            .FirstOrDefaultAsync(e => e.Id == id);
 
         if (employee is null)
         {
@@ -51,5 +45,67 @@ public class EmployeesController : ControllerBase
         }
 
         return Ok(employee);
+    }
+
+    // POST: api/employees
+    [HttpPost]
+    public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
+    {
+        employee.Id = 0;
+        employee.DateCreatedUtc = DateTime.UtcNow;
+
+        _context.Employees.Add(employee);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction(
+            nameof(GetEmployeeById),
+            new { id = employee.Id },
+            employee
+        );
+    }
+
+    // PUT: api/employees/1
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> UpdateEmployee(int id, Employee employee)
+    {
+        var existingEmployee = await _context.Employees.FindAsync(id);
+
+        if (existingEmployee is null)
+        {
+            return NotFound(new
+            {
+                message = $"Employee with ID {id} was not found."
+            });
+        }
+
+        existingEmployee.FirstName = employee.FirstName;
+        existingEmployee.LastName = employee.LastName;
+        existingEmployee.Email = employee.Email;
+        existingEmployee.Department = employee.Department;
+        existingEmployee.JobTitle = employee.JobTitle;
+
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    // DELETE: api/employees/1
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteEmployee(int id)
+    {
+        var employee = await _context.Employees.FindAsync(id);
+
+        if (employee is null)
+        {
+            return NotFound(new
+            {
+                message = $"Employee with ID {id} was not found."
+            });
+        }
+
+        _context.Employees.Remove(employee);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
     }
 }
